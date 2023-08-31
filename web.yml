@@ -1,6 +1,6 @@
 ---
 - name: Configuring Web Server
-  hosts: web
+  hosts: all
   become: yes
   tasks:
     - name: Installing nginx
