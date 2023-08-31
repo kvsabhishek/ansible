@@ -8,11 +8,11 @@
         name: nginx
         state: present
     - name: Deleting default nginx files
-      ansible.buildin.file:
+      ansible.builtin.file:
         path: /usr/share/nginx/html/
         state: absent
     - name: Download web contents
-      ansible.builin.command:
+      ansible.builtin.command:
         cmd: curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip
       register: download
     - name: Unzipping web contents
