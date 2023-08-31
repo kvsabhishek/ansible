@@ -20,9 +20,9 @@
             state: directory
 
     - name: Download web contents
-      ansible.builtin.command:
-        cmd: curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip
-      register: download
+      ansible.builtin.get_url:
+        url: https://roboshop-builds.s3.amazonaws.com/web.zip
+        dest: /tmp
 
     - name: Unzipping web contents
       ansible.builtin.unarchive:
