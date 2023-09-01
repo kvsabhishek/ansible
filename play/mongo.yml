@@ -15,19 +15,20 @@
         gpgkey: https://www.mongodb.org/static/pgp/server-5.0.asc
         enabled: true
         state: present
-      when: ansible_facts.distribution == "Amazon"
-
-    - name: adding mongodb repository for redhat.centos
-      ansible.builtin.yum_repository:
-        name: mongodb-org-4.2
-        baseurl: https://repo.mongodb.org/yum/redhat/8/mongodb-org/4.2/x86_64/
-        description: MongoDB Repository
-        gpgkey: https://www.mongodb.org/static/pgp/server-5.0.asc
-        enabled: true
-        state: present
-      when: ansible_facts.distribution == "RedHat" or "CentOS"
 
     - name: installing mongodb
       ansible.builtin.package:
         name: mongodb-org
         state: present
+
+    - name: making mongodb open to internet
+      ansible.builtin.replace:
+        path: /etc/mongod.conf
+        regexp: "127.0.0.1"
+        replace: "0.0.0.0"
+
+    - name: starting mongodb service
+      ansible.builtin.service:
+        name: mongodb
+        state: started
+        enabled: yes
