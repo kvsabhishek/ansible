@@ -10,7 +10,7 @@
       block:
         - name: adding mongodb repository
           ansible.builtin.yum_repository:
-            name: mongo
+            name: mongodb-org-4.2
             baseurl: https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.2/x86_64/
             description: MongoDB YUM Repository
             gpgcheck: false
