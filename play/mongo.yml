@@ -12,7 +12,7 @@
         name: mongodb-org-4.2
         baseurl: https://repo.mongodb.org/yum/amazon/2/mongodb-org/4.2/x86_64/
         description: MongoDB Repository
-        gpgkey: https://www.mongodb.org/static/pgp/server-5.0.asc
+        gpgkey: https://www.mongodb.org/static/pgp/server-4.2.asc
         enabled: true
         state: present
 
