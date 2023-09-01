@@ -23,9 +23,9 @@
 
     - name: downloading catalouge code
       ansible.builtin.unarchive:
-        scr: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+        src: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
         dest: /home/ec2-user/app
-        remote_scr: yes
+        remote_src: yes
 
     - name: downloading dependencies
       ansible.builtin.command:
