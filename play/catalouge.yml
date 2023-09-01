@@ -4,7 +4,7 @@
   become: yes
   tasks:
     - name: installing nodejs
-      ansible.builtin.package:
+      ansible.builtin.yum:
         name: "{ { item } }"
         state: present
       loop:
