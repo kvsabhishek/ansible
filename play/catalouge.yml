@@ -5,7 +5,7 @@
   tasks:
     - name: installing nodejs
       ansible.builtin.package:
-        name: {{item}}
+        name: "{ { item } }"
         state: present
       loop:
         - https://rpm.nodesource.com/pub_16.x/nodistro/repo/nodesource-release-nodistro-1.noarch.rpm
