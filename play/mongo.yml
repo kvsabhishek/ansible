@@ -3,6 +3,9 @@
   hosts: localhost
   become: true
   tasks:
+    - name: printing facts
+      ansible.builtin.debug:
+        msg: ansible_facts
     - name: Adding and installing mongo on yum
       block:
         - name: adding mongodb repository
