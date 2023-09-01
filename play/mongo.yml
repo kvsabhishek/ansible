@@ -8,14 +8,14 @@
     #     var: ansible_facts
     - name: Adding and installing mongo on yum
       block:
-        - name: adding mongodb repository
-          ansible.builtin.yum_repository:
-            name: mongodb-org-4.2
-            baseurl: https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.2/x86_64/
-            description: MongoDB Repository
-            gpgcheck: false
-            enabled: true
-            state: present
+        # - name: adding mongodb repository
+        #   ansible.builtin.yum_repository:
+        #     name: mongodb-org-4.2
+        #     baseurl: https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.2/x86_64/
+        #     description: MongoDB Repository
+        #     gpgcheck: false
+        #     enabled: true
+        #     state: present
         - name: installing mongodb
           ansible.builtin.yum:
             name: mongodb-org
