@@ -3,21 +3,31 @@
   hosts: localhost
   become: true
   tasks:
-    # - name: printing facts
-    #   ansible.builtin.debug:
-    #     var: ansible_facts
-    - name: Adding and installing mongo on yum
-      block:
-        # - name: adding mongodb repository
-        #   ansible.builtin.yum_repository:
-        #     name: mongodb-org-4.2
-        #     baseurl: https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.2/x86_64/
-        #     description: MongoDB Repository
-        #     gpgcheck: false
-        #     enabled: true
-        #     state: present
-        - name: installing mongodb
-          ansible.builtin.yum:
-            name: mongodb-org
-            state: present
-      when: ansible_facts.pkg_mgr == 'yum' or 'dnf'
+    - name: printing facts
+      ansible.builtin.debug:
+        var: ansible_facts
+
+    - name: adding mongodb repository for amazon linux 2
+      ansible.builtin.yum_repository:
+        name: mongodb-org-4.2
+        baseurl: https://repo.mongodb.org/yum/amazon/2/mongodb-org/4.2/x86_64/
+        description: MongoDB Repository
+        gpgkey: https://www.mongodb.org/static/pgp/server-5.0.asc
+        enabled: true
+        state: present
+      when: ansible_facts.distribution == "Amazon"
+
+    - name: adding mongodb repository for redhat.centos
+      ansible.builtin.yum_repository:
+        name: mongodb-org-4.2
+        baseurl: https://repo.mongodb.org/yum/redhat/8/mongodb-org/4.2/x86_64/
+        description: MongoDB Repository
+        gpgkey: https://www.mongodb.org/static/pgp/server-5.0.asc
+        enabled: true
+        state: present
+      when: ansible_facts.distribution == "RedHat" or "CentOS"
+
+    - name: installing mongodb
+      ansible.builtin.package:
+        name: mongodb-org
+        state: present
