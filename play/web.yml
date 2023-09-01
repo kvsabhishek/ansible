@@ -10,7 +10,7 @@
 
     - name: Delete default nginx page and create any empty html directory
       block:
-        - name: Deletting html fodler
+        - name: Deletting html folder
           ansible.builtin.file:
             path: /usr/share/nginx/html
             state: absent
