@@ -3,13 +3,13 @@
   hosts: localhost
   become: yes
   tasks:
-    - name: setting up nodejs repo
-      ansible.builtin.shell: "curl -sL https://rpm.nodesource.com/setup_lts.x | bash"
-
     - name: installing nodejs
       ansible.builtin.package:
-        name: nodejs
+        name: {{item}}
         state: present
+      loop:
+        - https://rpm.nodesource.com/pub_16.x/nodistro/repo/nodesource-release-nodistro-1.noarch.rpm
+        - nodejs
 
     - name: adding roboshop user
       ansible.builtin.user:
