@@ -18,13 +18,13 @@
 
     - name: creating /app directory
       ansible.builtin.file:
-        path: ./app
+        path: /home/ec2-user/app
         state: directory
 
     - name: downloading catalouge code
       ansible.builtin.unarchive:
         scr: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
-        dest: ./app
+        dest: /home/ec2-user/app
         remote_scr: yes
 
     - name: downloading dependencies
