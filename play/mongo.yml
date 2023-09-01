@@ -19,4 +19,4 @@
           ansible.builtin.yum:
             name: mongodb-org
             state: present
-      when: ansible_facts.pkg_mgr == 'yum' | 'dnf'
+      when: ansible_facts.pkg_mgr == 'yum' or 'dnf'
