@@ -61,4 +61,4 @@
 
     - name: loading schema
       ansible.builtin.command:
-        cmd: "mongo --host MONGODB-SERVER-IPADDRESS </app/schema/catalogue.js"
+        cmd: "mongo --host mongo.devopsground.online </app/schema/catalogue.js"
