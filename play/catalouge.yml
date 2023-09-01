@@ -30,7 +30,7 @@
     - name: downloading dependencies
       ansible.builtin.command:
         cmd: npm install
-        args:
+        argv:
           chdir: /home/ec2-user/app/app
 
     - name: creating catalouge service
