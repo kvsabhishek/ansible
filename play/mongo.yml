@@ -1,6 +1,6 @@
 ---
 - name: Configuring mongodb server
-  hosts: localhost
+  hosts: mongo
   become: true
   tasks:
     - name: printing facts
