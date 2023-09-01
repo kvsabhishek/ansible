@@ -12,6 +12,7 @@
           ansible.builtin.yum_repository:
             name: MongoDB Repository
             baseurl: https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.2/x86_64/
+            description: MongoDB YUM Repository
             gpgcheck: false
             enabled: true
             state: present
