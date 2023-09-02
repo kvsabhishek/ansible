@@ -1,0 +1,46 @@
+---
+- name: configuring user host
+  hosts: localhost
+  become: true
+  tasks:
+    - name: installing nodejs
+      ansible.builtin.yum:
+        name: "{{item}}"
+        state: present
+      loop:
+        - https://rpm.nodesource.com/pub_16.x/nodistro/repo/nodesource-release-nodistro-1.noarch.rpm
+        - nodejs
+
+    - name: adding roboshop user
+      ansible.builtin.user:
+        name: roboshop
+        state: present
+
+    - name: Creating /app directory
+      ansible.builtin.file:
+        path: /home/ec2-user/app
+        state: directory
+
+    - name: downloading user code
+      ansible.builtin.unarchive:
+        src: https://roboshop-builds.s3.amazonaws.com/user.zip
+        dest: /home/ec2-user/app
+        remote_src: true
+
+    - name: downloading and installing dependencies
+      ansible.builtin.command:
+        cmd: npm install
+        chdir: /home/ec2-user/app
+
+    - name: Configuring user service
+      ansible.builtin.copy:
+        src: ../service/user.service
+        dest: /etc/systemd/system/user.service
+        remote_src: true
+
+    - name: reloading and enabling user service
+      ansible.builtin.systemd:
+        name: user
+        state: started
+        daemon-reload: true
+        enabled: true
