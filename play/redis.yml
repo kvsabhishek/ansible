@@ -1,0 +1,15 @@
+---
+- name: redis configuration
+  hosts: localhost
+  becomes: true
+  tasks:
+    - name: installing redis rpm
+      ansible.builtin.package:
+        name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+        state: present
+
+    - name: enabling redis 6.2
+      ansible.builtin.yum:
+        enablerepo: redis:remi-6.2
+        name: redis
+        state: enabled
