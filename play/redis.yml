@@ -13,3 +13,9 @@
         path: /etc/redis/redis.conf
         regexp: "127.0.0.1"
         replace: "0.0.0.0"
+
+    - name: starting and enabling redis service
+      ansible.builtin.service:
+        name: redis
+        state: started
+        enabled: true
