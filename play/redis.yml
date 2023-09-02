@@ -1,6 +1,6 @@
 ---
 - name: redis configuration
-  hosts: localhost
+  hosts: redis
   become: true
   tasks:
     - name: installing redis
