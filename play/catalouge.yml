@@ -1,6 +1,6 @@
 ---
 - name: Catalouge configuration
-  hosts: localhost
+  hosts: catalouge
   become: yes
   tasks:
     - name: installing nodejs
