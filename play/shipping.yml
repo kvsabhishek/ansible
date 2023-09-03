@@ -1,0 +1,67 @@
+---
+- name: configuring shipping
+  hosts: localhost
+  become: true
+  tasks:
+    - name: installing maven
+      ansible.builtin.package:
+        name: maven
+        state: present
+
+    - name: roboshop user
+      ansible.builtin.user:
+        name: roboshop
+        state: present
+
+    - name: checking and creating /app dir
+      ansible.builtin.file:
+        path: /app
+        state: directory
+
+    - name: downloading shipping content
+      ansible.builtin.unarchive:
+        src: https://roboshop-builds.s3.amazonaws.com/shipping.zip
+        dest: /app
+        remote_src: true
+
+    - name: packaging script
+      ansible.builtin.command:
+        cmd: mvn clean package
+        chdir: /app
+
+    - name: shipping service
+      ansible.builtin.copy:
+        content: |
+          [Unit]
+          Description=Shipping Service
+
+          [Service]
+          User=roboshop
+          Environment=CART_ENDPOINT=cart.devopsground.online:8080
+          Environment=DB_HOST=mysql.devopsgorund.online
+          ExecStart=/bin/java -jar /app/shipping.jar
+          SyslogIdentifier=shipping
+
+          [Install]
+          WantedBy=multi-user.target
+        dest: /etc/systemd/system/shipping.service
+
+    - name: starting shipping service and enabling
+      ansible.builtin.systemd:
+        daemon-reload: true
+        name: shipping
+        state: started
+
+    - name: installing mysql package
+      ansible.builtin.package:
+        name: mysql
+        state: present
+
+    - name: loading schema
+      ansible.builtin.command:
+        cmd: mysql -h mysql.devopsground.online -uroot -pRoboShop@1 < /app/schema/shipping.sql
+
+    - name: restarting shipping service
+      ansible.builtin.service:
+        name: shipping
+        state: restarted
