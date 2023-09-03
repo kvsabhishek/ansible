@@ -18,19 +18,19 @@
 
     - name: creating /app directory
       ansible.builtin.file:
-        path: /home/ec2-user/app
+        path: /app
         state: directory
 
     - name: downloading catalouge code
       ansible.builtin.unarchive:
         src: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
-        dest: /home/ec2-user/app
+        dest: /app
         remote_src: yes
 
     - name: downloading dependencies
       ansible.builtin.command:
         cmd: npm install
-        chdir: /home/ec2-user/app
+        chdir: /app
 
     - name: creating catalouge service
       ansible.builtin.copy:

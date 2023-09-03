@@ -18,19 +18,19 @@
 
     - name: Creating /app directory
       ansible.builtin.file:
-        path: /home/ec2-user/app
+        path: /app
         state: directory
 
     - name: downloading user code
       ansible.builtin.unarchive:
         src: https://roboshop-builds.s3.amazonaws.com/user.zip
-        dest: /home/ec2-user/app
+        dest: /app
         remote_src: true
 
     - name: downloading and installing dependencies
       ansible.builtin.command:
         cmd: npm install
-        chdir: /home/ec2-user/app
+        chdir: /app
 
     - name: Configuring user service
       ansible.builtin.copy:
