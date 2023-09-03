@@ -1,6 +1,6 @@
 ---
 - name: configuring user host
-  hosts: localhost
+  hosts: user
   become: true
   tasks:
     - name: installing nodejs
