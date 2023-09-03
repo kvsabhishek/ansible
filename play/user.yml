@@ -56,3 +56,21 @@
         state: started
         daemon-reload: true
         enabled: true
+
+    - name: adding mongodb repository for amazon linux 2
+      ansible.builtin.yum_repository:
+        name: mongodb-org-4.2
+        baseurl: https://repo.mongodb.org/yum/amazon/2/mongodb-org/4.2/x86_64/
+        description: MongoDB Repository
+        gpgkey: https://www.mongodb.org/static/pgp/server-4.2.asc
+        enabled: true
+        state: present
+
+    - name: installing mongodb
+      ansible.builtin.package:
+        name: mongodb-org-shell
+        state: present
+
+    - name: loading schema
+      ansible.builtin.command:
+        cmd: mongo --host mongo.devopsground.online </app/schema/user.js
