@@ -2,6 +2,8 @@
 - name: configuring mysql server
   hosts: localhost
   become: true
+  vars:
+    - service: mysqld
   tasks:
     - name: adding mysql repo
       ansible.builtin.copy:
@@ -18,11 +20,8 @@
         name: mysql-community-server
         state: present
 
-    - name: starting and enabling mysql
-      ansible.builtin.service:
-        name: mysqld
-        state: started
-        enabled: true
+    - include_role:
+        name: service_enable_start
 
     - name: changing default root password
       ansible.builtin.command:

@@ -3,23 +3,11 @@
   hosts: localhost
   become: true
   tasks:
-    - name: installing nodejs
-      ansible.builtin.yum:
-        name: "{{item}}"
-        state: present
-      loop:
-        - https://rpm.nodesource.com/pub_16.x/nodistro/repo/nodesource-release-nodistro-1.noarch.rpm
-        - nodejs
+    - include_role:
+        name: install_nodejs
 
-    - name: adding roboshop user
-      ansible.builtin.user:
-        name: roboshop
-        state: present
-
-    - name: adding roboshop user
-      ansible.builtin.user:
-        name: roboshop
-        state: present
+    - include_role:
+        name: add_roboshop_user
 
     - name: creating /app directory
       ansible.builtin.file:
