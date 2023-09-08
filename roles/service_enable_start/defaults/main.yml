@@ -1,0 +1,1 @@
+service: { { service } } #default value as service. It will override from play value
