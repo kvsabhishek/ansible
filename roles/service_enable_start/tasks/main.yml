@@ -3,6 +3,7 @@
 - name: starting and enabling mysql
   ansible.builtin.service:
     become: true
-    name: "{ { service } }"
+    name: "{{ service }}"
     state: started
     enabled: true
+    daemon-reload: true
