@@ -20,8 +20,8 @@
 
     - include_role:
         name: service_enable_start
-        vars:
-          - service: mysqld
+      vars:
+        - service: mysqld
 
     - name: changing default root password
       ansible.builtin.command:
