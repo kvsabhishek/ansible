@@ -47,10 +47,10 @@
         dest: /etc/systemd/system/shipping.service
 
     - name: starting shipping service and enabling
-      ansible.builtin.systemd:
-        daemon-reload: true
-        name: shipping
-        state: started
+      include_role:
+        name: service_enable_start
+      vars:
+        - service: shipping
 
     - name: installing mysql package
       ansible.builtin.package:

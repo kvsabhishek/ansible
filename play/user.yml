@@ -12,9 +12,8 @@
         - nodejs
 
     - name: adding roboshop user
-      ansible.builtin.user:
-        name: roboshop
-        state: present
+      include_role:
+        name: add_roboshop_user
 
     - name: Creating /app directory
       ansible.builtin.file:
@@ -51,11 +50,10 @@
         remote_src: true
 
     - name: reloading and enabling user service
-      ansible.builtin.systemd:
-        name: user
-        state: started
-        daemon-reload: true
-        enabled: true
+      include_role:
+        name: service_enable_start
+      vars:
+        - service: user
 
     - name: adding mongodb repository for amazon linux 2
       ansible.builtin.yum_repository:
