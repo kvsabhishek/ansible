@@ -32,11 +32,10 @@
         remote_src: true
 
     - name: demaon reload and stating, enabling catalouge service
-      ansible.builtin.systemd:
-        daemon_reload: true
-        name: catalogue
-        state: started
-        enabled: true
+      include_role:
+        name: service_enable_start
+      vars:
+        - service: catalouge
 
     - include_role:
         name: mongo_repo

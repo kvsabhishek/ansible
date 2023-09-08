@@ -15,7 +15,7 @@
         replace: "0.0.0.0"
 
     - name: starting and enabling redis service
-      ansible.builtin.service:
-        name: redis
-        state: started
-        enabled: yes
+      include_role:
+        name: service_enable_start
+      vars:
+        - service: redis

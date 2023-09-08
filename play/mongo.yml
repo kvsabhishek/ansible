@@ -18,7 +18,7 @@
         replace: "0.0.0.0"
 
     - name: starting mongodb service
-      ansible.builtin.service:
-        name: mongod
-        state: started
-        enabled: yes
+      include_role:
+        name: service_enable_start
+      vars:
+        - service: mongodb

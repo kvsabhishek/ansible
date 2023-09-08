@@ -1,6 +1,6 @@
 ---
 - name: configuring shipping
-  hosts: localhost
+  hosts: shipping
   become: true
   tasks:
     - name: installing maven
@@ -9,9 +9,8 @@
         state: present
 
     - name: roboshop user
-      ansible.builtin.user:
-        name: roboshop
-        state: present
+      include_role:
+        name: add_roboshop_user
 
     - name: checking and creating /app dir
       ansible.builtin.file:
