@@ -1,6 +1,3 @@
-- ansible.builtin.debug:
-    msg: "{{ service }}"
-
 - name: starting and enabling mysql
   ansible.builtin.service:
     name: "{{ service }}"
