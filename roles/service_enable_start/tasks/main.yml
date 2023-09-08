@@ -1,5 +1,6 @@
 - name: starting and enabling mysql
-  ansible.builtin.service:
+  ansible.builtin.systemd:
     name: "{{ service }}"
     state: started
     enabled: true
+    daemon_reload: true

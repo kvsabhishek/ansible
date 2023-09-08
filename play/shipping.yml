@@ -61,6 +61,7 @@
         cmd: mysql -h mysql.devopsground.online -uroot -pRoboShop@1 < /app/schema/shipping.sql
 
     - name: restarting shipping service
-      ansible.builtin.service:
-        name: shipping
-        state: restarted
+      include_role:
+        name: service_enable_start
+      vars:
+        - service: shipping
