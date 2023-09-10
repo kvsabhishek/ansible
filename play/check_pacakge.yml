@@ -6,7 +6,13 @@
     - name: checking package facts
       ansible.builtin.package_facts:
         manager: auto
+    - name: checking service status
+      ansible.builtin.service_facts:
 
     - name: printing package facts
       ansible.builtin.debug:
-        var: ansible_facts.packages.ansible
+        var: ansible_facts.packages.ansible #checking for ansible package installed or not
+
+    - name: printing package facts
+      ansible.builtin.debug:
+        var: ansible_facts.service
