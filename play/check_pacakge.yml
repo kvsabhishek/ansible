@@ -3,8 +3,10 @@
   hosts: localhost
   become: true
   tasks:
-    - ansible_builtin.package_facts:
+    - name: checking package facts
+      ansible_builtin.package_facts:
         manager: auto
 
-    - ansible_builtin.debug:
+    - name: printing package facts
+      ansible_builtin.debug:
         var: ansible_facts.packages
