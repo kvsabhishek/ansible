@@ -25,6 +25,8 @@
         cmd: npm install
         chdir: /app
 
+    - name: check
+
     - name: configuring cart service
       ansible.builtin.copy:
         content: |
@@ -42,8 +44,10 @@
           WantedBy=multi-user.target
         dest: /etc/systemd/system/cart.service
 
-    - name: starting cart service
-      include_role:
-        name: service_enable_start
-      vars:
-        - service: cart
+  handlers:
+    - name: starting and enabling redis
+      ansible.builtin.systemd:
+        name: cart
+        state: started
+        enabled: true
+        daemon_reload: true

@@ -1,0 +1,10 @@
+---
+- name: checking if package is already installed or not
+  hosts: localhost
+  become: true
+  tasks:
+    - ansible_builtin.package_facts:
+        manager: auto
+
+    - ansible.builtin.debug:
+        var: ansible_facts.packages
