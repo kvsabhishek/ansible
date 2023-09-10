@@ -16,4 +16,4 @@
 
     - name: printing package facts
       ansible.builtin.debug:
-        var: ansible_facts.services.nginx.service
+        var: ansible_facts.services."nginx.service"
