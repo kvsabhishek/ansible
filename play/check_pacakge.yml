@@ -1,6 +1,6 @@
 ---
 - name: checking package installed or not
-  hosts: localhosts
+  hosts: localhost
   become: true
   tasks:
     - name: checking package facts
