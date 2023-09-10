@@ -22,4 +22,4 @@
             regexp: "127.0.0.1"
             replace: "0.0.0.0"
       when: ansible_facts['distribution'] == 'CentOS'
-      notify: service_enable_start : starting and enabling mysql
+      notify: starting and enabling mysql
