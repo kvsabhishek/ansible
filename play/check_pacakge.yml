@@ -6,5 +6,5 @@
     - ansible_builtin.package_facts:
         manager: auto
 
-    - ansible.builtin.debug:
+    - ansible_builtin.debug:
         var: ansible_facts.packages
