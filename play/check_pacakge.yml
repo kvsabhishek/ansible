@@ -4,9 +4,9 @@
   become: true
   tasks:
     - name: checking package facts
-      ansible_builtin.package_facts:
+      ansible.builtin.package_facts:
         manager: auto
 
     - name: printing package facts
-      ansible_builtin.debug:
+      ansible.builtin.debug:
         var: ansible_facts.packages
