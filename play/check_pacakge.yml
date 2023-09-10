@@ -16,4 +16,4 @@
 
     - name: printing package facts
       ansible.builtin.debug:
-        var: ansible_facts.services["nginx.service"].state
+        var: ansible_facts.services["nginx.service"].state # get the status of the service if running or not
