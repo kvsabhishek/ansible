@@ -1,7 +1,8 @@
+- name: setting up nodejs repo
+  ansible.builtin.command:
+    cmd: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+
 - name: installing nodejs
   ansible.builtin.yum:
-    name: "{{item}}"
+    name: nodejs
     state: present
-  loop:
-    - https://rpm.nodesource.com/pub_16.x/nodistro/repo/nodesource-release-nodistro-1.noarch.rpm
-    - nodejs

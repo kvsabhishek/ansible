@@ -3,19 +3,23 @@
   hosts: redis
   become: true
   tasks:
-    - name: installing redis
-      ansible.builtin.package:
-        name: redis
-        state: present
+    - name: checking and installing redis
+      block:
+        - name: installing redis
+          ansible.builtin.package:
+            name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+            state: present
 
-    - name: opening config to public
-      ansible.builtin.replace:
-        path: /etc/redis/redis.conf
-        regexp: "127.0.0.1"
-        replace: "0.0.0.0"
+        - name: enabling and installing redis
+          ansible.builtin.yum:
+            name: redis
+            enablerepo: redis:remi-6.2
+            state: present
 
-    - name: starting and enabling redis service
-      include_role:
-        name: service_enable_start
-      vars:
-        - service: redis
+        - name: opening config to public
+          ansible.builtin.replace:
+            path: /etc/redis/redis.conf
+            regexp: "127.0.0.1"
+            replace: "0.0.0.0"
+      when: ansible_facts['distribution'] == 'CentOS'
+      notify: service_enable_start : starting and enabling mysql
