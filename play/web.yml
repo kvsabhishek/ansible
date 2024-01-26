@@ -3,10 +3,18 @@
   hosts: web
   become: yes
   tasks:
+    - name: checking package facts
+      ansible.builtin.package_facts:
+        manager: auto
+
+    - name: checking service status
+      ansible.builtin.service_facts:
+
     - name: Installing nginx
       ansible.builtin.package:
         name: nginx
         state: present
+      when: ansible_facts.packages.nginx
 
     - name: Delete default nginx page and create any empty html directory
       block:
